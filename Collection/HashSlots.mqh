@@ -100,7 +100,7 @@ void HashSlots::upsize()
   {
    if(m_htused>((m_htsize<<1)/3))
      {
-      Debug(StringFormat("trigger upsize for hash table size: %d",m_htused));
+      //Debug(StringFormat("trigger upsize for hash table size: %d",m_htused));
       // since we need to relocate entries after slot resize, empty slot must be reclaimed
       if(!m_entries.isCompacted()) m_entries.compact();
       // double slots

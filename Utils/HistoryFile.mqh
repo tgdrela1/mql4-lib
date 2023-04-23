@@ -27,6 +27,8 @@ class HistoryFile
   {
    ObjectAttrRead(string,symbol,Symbol);
    ObjectAttrRead(int,period,Period);
+   ObjectAttrRead(long,digits,Digits);
+   
 private:
    const int         HEADER_SIZE;
    const int         RECORD_SIZE;
@@ -64,6 +66,7 @@ HistoryFile::HistoryFile(string symbol,int period)
   {
    m_symbol=symbol;
    m_period=period;
+   m_digits=SymbolInfoInteger(m_symbol, SYMBOL_DIGITS);
    m_handle=-1;
   }
 //+------------------------------------------------------------------+
@@ -129,7 +132,7 @@ void HistoryFile::writeHeader(void)
       FileWriteString(m_handle,file_copyright,64);
       FileWriteString(m_handle,m_symbol,12);
       FileWriteInteger(m_handle,m_period,LONG_VALUE);
-      FileWriteInteger(m_handle,Digits,LONG_VALUE);
+      FileWriteInteger(m_handle,(int)m_digits,LONG_VALUE);
       FileWriteInteger(m_handle,0,LONG_VALUE);
       FileWriteInteger(m_handle,0,LONG_VALUE);
       FileWriteArray(m_handle,unused,0,13);

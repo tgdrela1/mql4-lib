@@ -48,6 +48,7 @@
 #define FORMAT_MESSAGE_IGNORE_INSERTS 0x00000200
 
 #import "kernel32.dll"
+int GetLastError(void);
 // close any kernel object handle
 bool CloseHandle(intptr_t hObject);
 uint FormatMessageW(uint dwFlags,
@@ -462,7 +463,7 @@ short    GetAsyncKeyState(int nVirtKey);
 //+------------------------------------------------------------------+
 //| Get system defined error code message                            |
 //+------------------------------------------------------------------+
-string GetErrorMessage(int errorCode)
+string GetErrorMessage(const int errorCode)
   {
    static ushort buffer[64*1024];
    FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM|FORMAT_MESSAGE_IGNORE_INSERTS,

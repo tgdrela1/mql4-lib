@@ -62,16 +62,16 @@ public:
    //--- UI events
    virtual void      onKeyDown(int keyCode,int repeatCount,uint bitmask) {}
    virtual void      onMouseMove(int x,int y,uint bitmask) {}
-   virtual void      onClick(int x,int y) {}
+   virtual void      onClick(const int x,const int y) {}
    virtual void      onChartChange() {}
 
    //--- Object events
-   virtual void      onObjectCreate(string id) {}
-   virtual void      onObjectDelete(string id) {}
-   virtual void      onObjectChange(string id) {}
-   virtual void      onObjectClick(string id,int x,int y) {}
-   virtual void      onObjectDrag(string id) {}
-   virtual void      onObjectEndEdit(string id) {}
+   virtual void      onObjectCreate(const string id) {}
+   virtual void      onObjectDelete(const string id) {}
+   virtual void      onObjectChange(const string id) {}
+   virtual void      onObjectClick(const string id, const int x, const int y) {}
+   virtual void      onObjectDrag(const string id) {}
+   virtual void      onObjectEndEdit(const string id) {}
   };
 //+------------------------------------------------------------------+
 //| Parse chart event parameters and distribute the event            |

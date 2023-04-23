@@ -134,6 +134,7 @@ public:
    double            getOpen(int shift) const {return m_open[m_bars-shift-1];}
    double            getClose(int shift) const {return m_close[m_bars-shift-1];}
    long              getVolume(int shift) const {return m_tickVolume[m_bars-shift-1];}
+   datetime          getTime(int shift) const {return m_time[m_bars-shift-1];}
 
    //--- additional methods
    int               getSpread(int shift) const {return m_spread[m_bars-shift-1];}

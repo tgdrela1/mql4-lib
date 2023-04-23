@@ -46,7 +46,7 @@ class __Set##Name: public GlobalAppParamSetter {public: void set() {GlobalAppPar
 
 //--- Input separator
 #define INPUT_SEP(Name) \
-input string ____##Name##____=""\
+sinput string ____##Name##____=""\
 
 //--- Input separator
 #define FIXED_INPUT_SEP(Name)

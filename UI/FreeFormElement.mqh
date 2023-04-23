@@ -96,10 +96,10 @@ public:
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
-class Bitmap: public FreeFormElement
+class BitmapLabel: public FreeFormElement
   {
 public:
-                     Bitmap(Panel *parent,string name)
+                     BitmapLabel(Panel *parent,string name)
    :FreeFormElement(parent,name,OBJ_BITMAP_LABEL)
      {}
 
@@ -141,13 +141,13 @@ public:
      }
 
                      Button(Panel *parent,string name,string text,
-                                              int x,int y,int high,int width,
+                                              int x,int y,int height,int width,
                                               int frontColor=clrBlack,
                                               int bgColor=clrWhite)
    :FreeFormElement(parent,name,OBJ_BUTTON)
      {
       setText(text);
-      setSize(width,high);
+      setSize(width,height);
       setX(x);
       setY(y);
       setBackgroundColor(bgColor);

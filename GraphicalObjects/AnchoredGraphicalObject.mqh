@@ -44,18 +44,72 @@ public:
 
    virtual bool      realize()=0;
 
-   bool              setAnchorPoint(int index,const AnchorPoint &ap) {return moveAnchor(index,ap.time,ap.price);}
+   bool              setAnchorPoint(const int index,const AnchorPoint &ap)
+     {
+      ENUM_OBJECT_PROPERTY_INTEGER timeProp;
+      ENUM_OBJECT_PROPERTY_DOUBLE priceProp;
+
+      if(index==0)
+        {timeProp=OBJPROP_TIME1;priceProp=OBJPROP_PRICE1;}
+      else if(index==1)
+        {timeProp=OBJPROP_TIME2;priceProp=OBJPROP_PRICE2;}
+      else if(index==2)
+        {timeProp=OBJPROP_TIME3;priceProp=OBJPROP_PRICE3;}
+        else
+      return false; 
+
+      if(getInteger(timeProp)==0)
+        {
+         return setInteger(index, timeProp, ap.time )&& setDouble(index,priceProp,ap.price);
+        }
+      else
+         return moveAnchor(index,ap.time,ap.price);
+     }
+
    bool              getAnchorPoint(int index,AnchorPoint &ap) const
      {
       ENUM_OBJECT_PROPERTY_INTEGER timeProp;
       ENUM_OBJECT_PROPERTY_DOUBLE priceProp;
-      if(index==0) {timeProp=OBJPROP_TIME1;priceProp=OBJPROP_PRICE1;}
-      else if(index==1) {timeProp = OBJPROP_TIME2;priceProp=OBJPROP_PRICE2;}
-      else if(index==2) {timeProp = OBJPROP_TIME3;priceProp=OBJPROP_PRICE3;}
+      if(index==0)
+        {timeProp=OBJPROP_TIME1;priceProp=OBJPROP_PRICE1;}
+      else if(index==1)
+        {timeProp=OBJPROP_TIME2;priceProp=OBJPROP_PRICE2;}
+      else if(index==2)
+        {timeProp=OBJPROP_TIME3;priceProp=OBJPROP_PRICE3;}
       else return false;
       ap.time=(datetime)getInteger(timeProp);
       ap.price=getDouble(priceProp);
       return true;
      }
   };
+//+------------------------------------------------------------------+
+//| OBJ_RECTANGLE                                            |
+//+------------------------------------------------------------------+
+class Rectangle: public AnchoredGraphicalObject
+  {
+public:
+//                     Rectangle(string id,long chartId=0,int subwindow=0):AnchoredGraphicalObject(OBJ_RECTANGLE,id,chartId,subwindow) {realize();}
+                     Rectangle(string id,AnchorPoint &ap0,AnchorPoint &ap1,long chartId=0,int subwindow=0):AnchoredGraphicalObject(OBJ_RECTANGLE,id,chartId,subwindow) {create(ap0.time, ap0.price, ap1.time, ap1.price);}
+
+   bool              setBackgroundColor(color value) {return setInteger(OBJPROP_BGCOLOR,value);}
+   color             getBackgroundColor() const {return color(getInteger(OBJPROP_BGCOLOR));}
+
+   bool              realize();
+
+   bool              setBorderType(ENUM_BORDER_TYPE value) {return setInteger(OBJPROP_BORDER_TYPE,value);}
+   ENUM_BORDER_TYPE  getBorderType() const {return(ENUM_BORDER_TYPE)getInteger(OBJPROP_BORDER_TYPE);}
+  };
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool Rectangle::realize(void)
+  {
+   AnchorPoint ap0,ap1;
+   if(getAnchorPoint(0,ap0) && getAnchorPoint(1,ap1))
+     {
+      return create(ap0.time, ap0.price, ap1.time, ap1.price);
+     }
+   else return false;
+  }
+
 //+------------------------------------------------------------------+

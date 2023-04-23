@@ -59,10 +59,10 @@ public:
 //+------------------------------------------------------------------+
 //| OBJ_RECTANGLE_LABEL                                              |
 //+------------------------------------------------------------------+
-class Rectangle: public FreeFormGraphicalObject
+class RectangleLabel: public FreeFormGraphicalObject
   {
 public:
-                     Rectangle(string id,long chartId=0,int subwindow=0):FreeFormGraphicalObject(OBJ_RECTANGLE_LABEL,id,chartId,subwindow) {}
+                     RectangleLabel(string id,long chartId=0,int subwindow=0):FreeFormGraphicalObject(OBJ_RECTANGLE_LABEL,id,chartId,subwindow) {}
 
    bool              setBackgroundColor(color value) {return setInteger(OBJPROP_BGCOLOR,value);}
    color             getBackgroundColor() const {return color(getInteger(OBJPROP_BGCOLOR));}
